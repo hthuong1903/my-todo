@@ -8,7 +8,6 @@ import { TextField, Box, FormControlLabel, Checkbox } from '@mui/material';
 import { useDispatch } from 'react-redux'
 import { useState } from 'react';
 import { addTodo } from '../../store/action/todoListAction';
-import { toast } from 'react-toastify'
 export default function ModelAddTodoItem({ isOpen, handleClose }) {
     const dispatch = useDispatch()
     const [title, setTitle] = useState('');
@@ -24,6 +23,7 @@ export default function ModelAddTodoItem({ isOpen, handleClose }) {
         }
         console.log("newTodo", newTodo)
         dispatch(addTodo(newTodo));
+        handleClose()
     }
     const onClickChecked = () => {
         setCompleted(!completed);

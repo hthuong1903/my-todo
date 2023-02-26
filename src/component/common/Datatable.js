@@ -17,7 +17,8 @@ export default function DataTable() {
     const [isOpenAddModal, setIsOpenAddModal] = useState(false)
     const [isOpenUpdateModal, setIsOpenUpdateModal] = useState(false)
     const dispatch = useDispatch()
-
+    const [todoId, setTodoId] = useState('')
+    const [todoItem, setTodoItem] = useState({})
     useEffect(() => {
         fetch("https://jsonplaceholder.typicode.com/todos")
             .then(res => res.json())
@@ -72,6 +73,7 @@ export default function DataTable() {
             align: 'center',
             flex: 1,
             renderCell: (params) => {
+                // console.log("params", params)
                 return (
                     <>
                         <Tooltip title="Xóa">
@@ -91,6 +93,7 @@ export default function DataTable() {
                                 size="small"
                                 onClick={() => {
                                     setIsOpenUpdateModal(true)
+                                    setTodoItem(params.row)
                                 }}>
                                 <EditRoundedIcon fontSize="inherit" />
                             </IconButton>
@@ -110,7 +113,9 @@ export default function DataTable() {
         {isOpenUpdateModal && (
             <ModelUpdateTodoItem 
                 isOpen={isOpenUpdateModal}
-                handleClose={() => setIsOpenUpdateModal(false)}
+                handleClose={() => setIsOpenUpdateModal(false)
+                }
+                todo={todoItem}
             />
         )}
         <h2>Add Todo Item</h2>

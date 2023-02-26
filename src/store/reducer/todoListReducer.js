@@ -21,7 +21,6 @@ const updateTodoItem= (state, updatedTodo) => {
 }
 
 
-
 export const todoListReducer = (state = [], action) => {
     console.log("state", state)
     console.log("action", action)

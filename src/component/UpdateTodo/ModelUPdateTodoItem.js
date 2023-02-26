@@ -8,19 +8,20 @@ import { TextField, Box } from '@mui/material';
 import { updateTodo } from '../../store/action/todoListAction';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react'
-export default function ModelUpdateTodoItem({ isOpen, handleClose, props }) {
+export default function ModelUpdateTodoItem({ isOpen, handleClose, todo }) {
     const dispatch = useDispatch()
-    const [title, setTitle] = useState('');
-    const [userId, setUserId] = useState('');
-
+    const [title, setTitle] = useState(todo.title);
+    const [userId, setUserId] = useState(todo.userId);
     const onClickUpdateTodo = () => {
         let newTodo = {
+            id: todo.id,
             userId,
-            title
+            title,
+            completed: todo.completed
         }
         console.log("newTodo", newTodo)
         dispatch(updateTodo(newTodo));
-
+        handleClose()
     }
     // console.log(onClickUpdateTodo())
     const onChangeTile = (e) => {
